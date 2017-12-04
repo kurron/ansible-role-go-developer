@@ -1,58 +1,57 @@
 ---
-- name: Download PhpStorm Tarball
+- name: Download GoLand Tarball
   become: no
   get_url:
-      url: "https://download.jetbrains.com/webide/PhpStorm-{{php_phpstorm_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{base_download_directory}}/phpstorm-{{php_phpstorm_version}}.tar.gz"
+      url: "https://download.jetbrains.com/go/goland-{{go_goland_version}}.tar.gz"
+      dest: "{{ansible_user_dir}}/{{base_download_directory}}/goland-{{go_goland_version}}.tar.gz"
       mode: 0444
-  when: php_phpstorm_install
+  when: go_goland_install
 
-- name: Uncompress PhpStorm Tarball
+- name: Uncompress GoLand Tarball
   become: no
   unarchive:
-      src: "{{ansible_user_dir}}/{{base_download_directory}}/phpstorm-{{php_phpstorm_version}}.tar.gz"
+      src: "{{ansible_user_dir}}/{{base_download_directory}}/goland-{{go_goland_version}}.tar.gz"
       dest: "{{ansible_user_dir}}/{{base_software_directory}}"
       copy: no
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-      creates: "{{ansible_user_dir}}/{{base_software_directory}}/PhpStorm-{{php_phpstorm_build}}/build.txt"
-  when: php_phpstorm_install
+      creates: "{{ansible_user_dir}}/{{base_software_directory}}/GoLand-{{go_goland_version}}/build.txt"
+  when: go_goland_install
 
-- name: Create Softlink To PhpStorm
+- name: Create Softlink To GoLand
   become: no
   file:
-      src: "{{ansible_user_dir}}/{{base_software_directory}}/PhpStorm-{{php_phpstorm_build}}"
-      dest: "{{ansible_user_dir}}/{{base_software_directory}}/phpstorm"
+      src: "{{ansible_user_dir}}/{{base_software_directory}}/GoLand-{{go_goland_version}}"
+      dest: "{{ansible_user_dir}}/{{base_software_directory}}/goland"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link
-  when: php_phpstorm_install
+  when: go_goland_install
 
-- name: Create Desktop Icon For PhpStorm
+- name: Create Desktop Icon For GoLand
   become: no
   template:
-      src: "templates/phpstorm.desktop.j2"
-      dest: "{{ansible_user_dir}}/Desktop/phpstorm.desktop"
+      src: "templates/goland.desktop.j2"
+      dest: "{{ansible_user_dir}}/Desktop/goland.desktop"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0755
-  when: php_phpstorm_install
+  when: go_goland_install
 
-- name: Set Global Environment To Have PhpStorm Use Shared JDK
+- name: Set Global Environment To Have GoLand Use Shared JDK
   become: yes
   template:
-      src: "templates/phpstorm-environment.sh.j2"
-      dest: "/etc/profile.d/phpstorm-environment.sh"
+      src: "templates/go-environment.sh.j2"
+      dest: "/etc/profile.d/goland-environment.sh"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-  when: php_phpstorm_share_jdk
+  when: go_goland_install
 
-- name: Remove PhpStorms's Embedded JDK
+- name: Remove GoLand's Embedded JDK
   become: no
   file:
-      path: "{{ansible_user_dir}}/{{base_software_directory}}/phpstorm/jre"
+      path: "{{ansible_user_dir}}/{{base_software_directory}}/goland/jre"
       state: absent
-  when: php_phpstorm_share_jdk
-
+  when: go_goland_install

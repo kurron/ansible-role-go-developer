@@ -6,7 +6,7 @@ rm -rf /tmp/roles
 mkdir /tmp/roles
 cp -R ~/GitHub/ansible-role-base /tmp/roles/kurron.base
 cp -R ~/GitHub/ansible-role-jdk /tmp/roles/kurron.jdk
-cp -R ~/GitHub/ansible-role-php-developer /tmp/roles/kurron.php-developer
+cp -R ~/GitHub/ansible-role-go-developer /tmp/roles/kurron.go-developer
 
 packer validate packer.json
 packer build --force packer.json
@@ -18,7 +18,7 @@ xhost +
 
 CMD="docker run --env DISPLAY=unix${DISPLAY} \
                 --env HOME=${HOME_DIR} \
-                --env PHPSTORM_JDK=/usr/lib/jvm/azul-jdk-8 \
+                --env GOLAND_JDK=/usr/lib/jvm/azul-jdk-8 \
                 --env JDK_HOME=/usr/lib/jvm/azul-jdk-8 \
                 --env JAVA_HOME=/usr/lib/jvm/azul-jdk-8 \
                 --net host \
@@ -27,6 +27,6 @@ CMD="docker run --env DISPLAY=unix${DISPLAY} \
                 --rm \
                 --volume /tmp/.X11-unix:/tmp/.X11-unix \
                 --workdir /root/Software \
-                kurron/ansible-role-php-developer:latest bash"
+                kurron/ansible-role-go-developer:latest bash"
 echo $CMD
 $CMD

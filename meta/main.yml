@@ -1,6 +1,6 @@
 galaxy_info:
   author: Ronald D. Kurr
-  description: PHP IDE and command-line tools.
+  description: Go Lang IDE and command-line tools.
   company: jvmguy.com
 
   license: Apache 2
@@ -32,9 +32,9 @@ galaxy_info:
 
   galaxy_tags:
       - development
-      - php
+      - go
       - jetbrains
-      - PhpStorm
+      - GoLand
 
 dependencies:
     - { role: kurron.jdk }

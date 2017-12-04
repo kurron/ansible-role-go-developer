@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installation of tools than any self-respecting PHP developer loves and needs.
+Installation of tools than any self-respecting Go developer loves and needs.
 
 Requirements
 ------------
@@ -11,9 +11,7 @@ TODO
 Role Variables
 --------------
 
-* php_phpstorm_install: true
-* php_phpstorm_version: 2016.2.1
-* php_phpstorm_build: 162.1889.1
+TODO
 
 Dependencies
 ------------

@@ -21,14 +21,14 @@
             "type": "ansible-local",
             "playbook_file": "test.yml",
             "extra_arguments": ["--verbose"],
-            "role_paths": ["/tmp/roles/kurron.base", "/tmp/roles/kurron.jdk", "/tmp/roles/kurron.php-developer"]
+            "role_paths": ["/tmp/roles/kurron.base", "/tmp/roles/kurron.jdk", "/tmp/roles/kurron.go-developer"]
         }
     ],
     "post-processors": [
         [
             {
                 "type": "docker-tag",
-                "repository": "kurron/ansible-role-php-developer",
+                "repository": "kurron/ansible-role-go-developer",
                 "tag": "latest"
             }
         ]
